@@ -4,9 +4,23 @@ from pathlib import Path
 import streamlit as st
 
 APP_DIR = Path(__file__).resolve().parent
+PROJECT_DIR = APP_DIR.parent
+DB_PATH = PROJECT_DIR / "data" / "operations.db"
 
 if str(APP_DIR) not in sys.path:
     sys.path.insert(0, str(APP_DIR))
+
+
+def ensure_database_exists():
+    if not DB_PATH.exists():
+        from data.create_database import create_database
+        from data.seed_database import seed_database
+
+        create_database()
+        seed_database()
+
+
+ensure_database_exists()
 
 from actions import (
     approve_proposal,
