@@ -2,13 +2,16 @@ import sys
 from pathlib import Path
 
 import streamlit as st
-
 APP_DIR = Path(__file__).resolve().parent
 PROJECT_DIR = APP_DIR.parent
 DB_PATH = PROJECT_DIR / "data" / "operations.db"
 
 if str(APP_DIR) not in sys.path:
     sys.path.insert(0, str(APP_DIR))
+
+if str(PROJECT_DIR) not in sys.path:
+    sys.path.insert(0, str(PROJECT_DIR))
+
 
 
 def ensure_database_exists():
