@@ -1,6 +1,10 @@
 \# Gold Adam Route Operations Copilot
 
+\[!\[Live Demo](https://img.shields.io/badge/Live\_Demo-Streamlit-FF4B4B?logo=streamlit\&logoColor=white)](https://dhyeyproject.streamlit.app/)
 
+
+
+\*\*Live demo:\*\* \[Route Operations Copilot](PASTE\_YOUR\_STREAMLIT\_URL\_HERE)
 
 A portfolio prototype demonstrating safe, database-connected workflow automation for route operations.
 
@@ -10,27 +14,101 @@ A portfolio prototype demonstrating safe, database-connected workflow automation
 
 
 
-The application:
+This prototype demonstrates a controlled automation workflow for route operations:
 
 
 
-\- Detects unassigned bookings.
+1\. Detects unassigned bookings.
 
-\- Detects overlapping bookings.
+2\. Detects overlapping bookings.
 
-\- Detects bookings outside employee working hours.
+3\. Detects bookings outside employee working hours.
 
-\- Creates structured agent proposals.
+4\. Creates structured agent proposals.
 
-\- Requires approval before operational changes.
+5\. Requires human approval before operational changes.
 
-\- Executes approved changes inside a database transaction.
+6\. Executes approved changes inside a database transaction.
 
-\- Checks the affected row count.
+7\. Checks that exactly one row was affected.
 
-\- Verifies the updated state.
+8\. Verifies the final database state.
 
-\- Records an audit log.
+9\. Records an audit log.
+
+
+
+\## Architecture
+
+
+
+```text
+
+SQLite database
+
+&#x20;       ↓
+
+Deterministic SQL checks
+
+&#x20;       ↓
+
+Operational issue detected
+
+&#x20;       ↓
+
+Agent proposal created
+
+&#x20;       ↓
+
+Human approval
+
+&#x20;       ↓
+
+Current state revalidated
+
+&#x20;       ↓
+
+Transactional update
+
+&#x20;       ↓
+
+Affected-row verification
+
+&#x20;       ↓
+
+Audit log
+
+```
+
+
+
+The system separates detection, proposal, approval, execution, and auditing. An AI model can later interpret tasks and explain results, but it should not bypass these controls.
+
+
+
+\## Why this matters
+
+
+
+Many AI demos stop at generating an answer. This project focuses on the operational layer:
+
+
+
+\- What data can the agent read?
+
+\- What action can it propose?
+
+\- Who approves the action?
+
+\- What happens if the database changes before execution?
+
+\- How do we ensure exactly one row is changed?
+
+\- How do we make the action auditable?
+
+
+
+This is the pattern needed when automation affects bookings, payments, customer communication, compliance reporting, or other systems people depend on.
 
 
 
